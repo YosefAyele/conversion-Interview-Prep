@@ -1,0 +1,13 @@
+n=int(input())
+for j in range(n):
+    s=int(input())
+    a=list(map(int,input().split()))
+    d={i+1:a[i] for i in range(s)}
+    
+    cnt=0
+    res=0
+    for i in d:
+        if d[i]>cnt:
+            cnt=d[i]
+            res=i
+    print(res)
