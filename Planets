@@ -1,0 +1,15 @@
+from collections import Counter
+n=int(input())
+for j in range(n):
+    inputs=list(map(int,input().split()))
+    a=list(map(int,input().split()))
+    c=inputs[1]
+ 
+    orbits=Counter(a)
+    res=0
+    for i in orbits:
+        if orbits[i]>=c:
+            res+=c
+        else:
+            res+=orbits[i]
+    print(res)
