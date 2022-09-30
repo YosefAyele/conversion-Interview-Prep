@@ -1,0 +1,12 @@
+n=int(input())
+for j in range(n):
+    s=int(input())
+    a=list(map(int,input().split()))
+    a.sort()
+    l,r=0,2
+    res=a[-1]-a[0]
+    while r<s:
+        res=min(a[r]-a[l],res)
+        l+=1
+        r+=1
+    print(res)
