@@ -1,0 +1,15 @@
+n=int(input())
+for j in range(n):
+    inputs=list(map(int,input().split()))
+    a=list(map(int,input().split()))
+    k=inputs[1]
+
+    l,r=0,k
+
+    while r<len(a):
+        if a[l]>a[r]:
+            a[r],a[l]=a[l],a[r]
+        l+=1
+        r+=1
+    
+    print(sum(a[-k:]))
