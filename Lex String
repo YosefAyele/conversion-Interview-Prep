@@ -1,0 +1,38 @@
+from collections import deque
+n=int(input())
+for j in range(n):
+    inputs=list(map(int,input().split()))
+    a=list(input())
+    b=list(input())
+    a.sort()
+    b.sort()
+ 
+    s1=deque(a)
+    s2=deque(b)
+ 
+    if s1[0]<s2[0]:
+        f=s1
+        s=s2
+    else:
+        f=s2
+        s=s1
+    k=inputs[2]
+    res=[]
+    cntf=cnts=0
+    while f and s:
+        shift=s[0]<f[0]
+ 
+        if shift and cnts==k:
+            shift=False
+        if not shift and cntf==k:
+            shift=True
+ 
+        if shift: 
+            res.append(s.popleft())
+            cnts+=1
+            cntf=0
+        else:
+            res.append(f.popleft())
+            cntf+=1
+            cnts=0
+    print("".join(res))
