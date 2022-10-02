@@ -1,0 +1,12 @@
+class Solution:
+    def sumOddLengthSubarrays(self, arr: List[int]) -> int:
+        res=0
+        l=0
+
+        for l in range(len(arr)):
+             currsum=0
+             for r in range(l,len(arr)):
+                 currsum+=arr[r]
+                 if (r-l+1)%2:
+                     res+=currsum
+        return res
