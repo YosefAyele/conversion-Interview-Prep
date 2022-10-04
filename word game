@@ -1,0 +1,27 @@
+n=int(input())
+for j in range(n):
+    s=int(input())
+ 
+    G1=input().split()
+    G2=input().split()
+    G3=input().split()
+    cnts={}
+    all=G1+G2+G3
+
+    for word in all:
+        if word in cnts:
+            cnts[word]+=1
+        else:
+            cnts[word]=1
+            
+    traverse=[G1,G2,G3]
+    for guys in traverse:
+        score=0
+        for word in guys:
+            if cnts[word]==1: 
+                score+=3
+            elif cnts[word]==2:
+                score+=1
+        print(score,end=" ")
+    print()
+
