@@ -1,0 +1,38 @@
+class Solution:
+    def longestMountain(self, arr: List[int]) -> int:
+        #approach 2
+        res=0
+        upto=[0]*len(arr)
+        for i in range(1,len(arr)):
+            if arr[i]>arr[i-1]:
+                upto[i]=upto[i-1]+1
+        downfrom=[0]*len(arr)
+        print(upto)
+        for i in range(len(arr)-2,-1,-1):
+            if arr[i]>arr[i+1]:
+                downfrom[i]=downfrom[i+1]+1
+        print(downfrom)
+
+        return max(upto[i]+downfrom[i]+1 if upto[i] and downfrom[i] else 0 for i in range(len(arr)))
+
+
+
+
+        # approach 1
+        if len(arr)<3: return 0
+        res=0
+        l=r=0
+
+        while l<len(arr):
+            r=l
+            if r<len(arr)-1 and arr[r]<arr[r+1]:
+                while r<len(arr)-1 and arr[r]<arr[r+1]:
+                    r+=1
+                
+                if r<len(arr)-1 and arr[r]>arr[r+1]:
+                    while r<len(arr)-1 and arr[r]>arr[r+1]:
+                        r+=1
+                    res=max(res,r-l+1)
+            l=max(r,l+1)
+
+        return res
