@@ -1,0 +1,49 @@
+class Solution:
+    def threeSumMulti(self, arr: List[int], target: int) -> int:
+
+        
+        #optimized
+        count=Counter(arr)
+        key=sorted(count)
+        ans=0
+        mod= 10**9 + 7
+        for i,x in enumerate(key):
+            T=target-x
+            j,k=i,len(key)-1
+
+            while j<=k:
+                y,z=key[j],key[k]
+                if y+z<T:
+                    j+=1
+                elif y+z>T:
+                    k-=1
+                else:
+                    if i < j < k:
+                        ans += count[x] * count[y] * count[z]
+                    elif i == j < k:
+                        ans += count[x] * (count[x] - 1) //2 * count[z]
+                    elif i < j == k:
+                        ans += count[x] * count[y] * (count[y] - 1) //2
+                    else:  # i == j == k
+                        ans += count[x] * (count[x] - 1) * (count[x] - 2) //6
+
+                    j += 1
+                    k -= 1
+
+        return ans%mod
+
+        
+       
+
+        #brute force
+        for i,n in enumerate(arr):
+            count=[0 for k in range(101)]
+
+            for j in range(i+1,len(arr)):
+                T=target-n-arr[j]
+
+                if T>=0 and T<=100 and count[T]>0:
+                    res+=count[T]
+                    # res%=(pow(10,9)+7)
+                count[arr[j]]+=1
+        return res%(pow(10,9)+7)
