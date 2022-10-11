@@ -1,0 +1,41 @@
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        if len(nums)==1: return 
+        if len(nums)==2: 
+            nums[0],nums[1]=nums[1],nums[0]
+            return
+        
+       
+        def reverse(arr,l,r):
+            while l<r:
+                nums[l],nums[r]=nums[r],nums[l]
+                l+=1
+                r-=1
+        #first find the point where the arrays stops increasing from right to left
+        l,r=0,len(nums)-1
+        while r>0 and nums[r]<=nums[r-1]:
+            r-=1
+        if r==0: 
+            reverse(nums,0,len(nums)-1)
+            return
+        #save the position where it stops increasing from r to l
+        l,fnlswp=r-1,nums[r-1]
+
+        #reverse the part of the array which was increasing from r to l , i.e decreasing from l to r
+        #this make that particular part increasing from l to r
+        reverse(nums,r,len(nums)-1)
+
+        #we want not greater, but immediately greater so we iterate through the array till we find a value
+        #immediately greater than the value where it stops increasing from r to l initially 
+        r=l+1
+        while r<len(nums) and nums[r]<=fnlswp:
+            r+=1
+        #finally swap those values 
+        nums[r],nums[l]=nums[l],nums[r]
+
+
+        
+        
